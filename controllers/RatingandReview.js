@@ -10,17 +10,17 @@ exports.createRating = async (req, res) => {
 
     // Check if the user is enrolled in the course
 
-    const courseDetails = await Course.findOne({
-      _id: courseId,
-      studentsEnroled: { $elemMatch: { $eq: userId } },
-    })
+    // const courseDetails = await Course.findOne({
+    //   _id: courseId,
+    //   studentsEnroled: { $elemMatch: { $eq: userId } },
+    // })
 
-    if (!courseDetails) {
-      return res.status(404).json({
-        success: false,
-        message: "Student is not enrolled in this course",
-      })
-    }
+    // if (!courseDetails) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Student is not enrolled in this course",
+    //   })
+    // }
 
     // Check if the user has already reviewed the course
     const alreadyReviewed = await RatingAndReview.findOne({
@@ -49,7 +49,8 @@ exports.createRating = async (req, res) => {
         ratingAndReviews: ratingReview,
       },
     })
-    await courseDetails.save()
+    
+    // await courseDetails.save()
 
     return res.status(201).json({
       success: true,
